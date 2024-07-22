@@ -1,0 +1,88 @@
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.item {
+  display: flex;
+}
+
+.image-wrapper {
+  width: 50%;
+  height: inherit;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  display: block;
+  width: inherit;
+  object-fit: cover;
+}
+
+.heart {
+  position: absolute;
+  top: 8%;
+  left: 90%;
+  width: 2rem;
+}
+
+.details-wrapper {
+  background-color: #ebebeb;
+  width: 50%;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 5%;
+}
+
+.name-wrapper {
+  font-size: 2.5rem;
+}
+
+.price-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.original-price {
+  opacity: 0.5;
+  font-weight: 700;
+  color: #231f20;
+  font-size: 2rem;
+  text-decoration: line-through;
+}
+
+.discounted-price {
+  font-weight: 700;
+  color: #ff3a68;
+  font-size: 3.75rem;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: #231f20;
+  color: #fff;
+  padding: 15px;
+  height: 3rem;
+  border: solid 1px #231f20;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+@media only screen and (max-width: 900px) {
+  html {
+    font-size: 10px;
+  }
+}
