@@ -1,22 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade, Navigation } from 'swiper/modules';
-import Heart from 'react-heart';
+import { Pagination, Navigation } from 'swiper/modules';
 import products from './assets/products.json';
 import './stylesheet.css';
 import 'swiper/css';
-import 'swiper/css/effect-fade';
-import 'swiper/css/navigation';
+import 'swiper/css/bundle';
 
 function App() {
-  const [active, setActive] = useState(false);
+  const [items, setItems] = useState(() => {
+    const items = localStorage.getItem('items');
+    return items ? JSON.parse(items) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('items', JSON.stringify(items));
+  }, [items]);
+
+  const setHeart = (element) => {
+    const addNewHeart = items.filter((el) => el === element);
+    if (addNewHeart.length === 0) {
+      setItems([...items, element]);
+    }
+    const filteredHearts = items.filter((el) => el !== element);
+    if (addNewHeart.length > 0) {
+      setItems(filteredHearts);
+    }
+  };
 
   return (
     <Swiper
+      slidesPerView={1}
       spaceBetween={30}
-      effect={'fade'}
       navigation={true}
-      modules={[EffectFade, Navigation]}
+      modules={[Pagination, Navigation]}
     >
       {products.map(
         ({ id, original_price, discounted_price, image, link, name }) => (
@@ -25,11 +41,32 @@ function App() {
               <div className='image-wrapper'>
                 <img className='image' src={image} />
                 <div className='heart'>
-                  <Heart
-                    isActive={active}
-                    onClick={() => setActive(!active)}
-                    activeColor='#ff3a68'
-                  />
+                  <svg
+                    onClick={() => setHeart(id)}
+                    viewBox='0 0 17 17'
+                    className='sc-bdfBwQ fmMilp'
+                    style={
+                      items?.filter((el) => el === id).length
+                        ? {
+                            fill: '#ff3a68',
+                            stroke: 'transparent',
+                            strokeWidth: 1 + 'px',
+                            marginBottom: 1 + 'rem',
+                          }
+                        : {
+                            fill: 'transparent',
+                            stroke: 'black',
+                            strokeWidth: 1 + 'px',
+                            marginBottom: 1 + 'rem',
+                          }
+                    }
+                    xmlns='http://www.w3.org/2000/svg'
+                  >
+                    <path
+                      fillRule='evenodd'
+                      d='M8.5,2.3C12.9-2.2,24,5.7,8.5,16C-7,5.7,4.1-2.2,8.5,2.3z'
+                    />
+                  </svg>
                 </div>
               </div>
 

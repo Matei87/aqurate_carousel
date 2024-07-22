@@ -12,7 +12,6 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-heart": "^1.0.6",
     "swiper": "^11.1.5"
   },
   "devDependencies": {
